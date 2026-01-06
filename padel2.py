@@ -2,7 +2,7 @@ from turtle import Turtle
 
 # In this class I will create class for the first padel that will move left or right
 # STARTING_POS = [(0,0),(0,20),(0,40)]
-X_POS = 350
+X_POS = 372
 Y_POS = 0
 INCREMENT = 20
 class Padel2:
