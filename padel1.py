@@ -3,22 +3,23 @@ from turtle import Turtle
 # In this class I will create class for the first padel that will move left or right
 
 # STARTING_POS = [(0,0),(0,20),(0,40)]
-X_POS = -380
-Y_POS = 0
+
 INCREMENT = 20
 class Padel1:
 
-    def __init__(self):
+    def __init__(self, x_coordinate ,y_coordinate):
+        self.x_coordinate = x_coordinate
+        self.y_coordinate = y_coordinate
         self.all_head = []
-        self.create_player()
+        self.create_player(x_pos=x_coordinate, y_pos=y_coordinate)
 
 
-    def create_player(self):
+    def create_player(self, x_pos, y_pos):
         player = Turtle(shape="square")
         player.turtlesize(stretch_wid=5,stretch_len=1)
         player.color("white")
         player.penup()
-        player.goto(x=X_POS, y=Y_POS)
+        player.goto(x=x_pos, y=y_pos)
         self.all_head.append(player)
 
     def up(self):
