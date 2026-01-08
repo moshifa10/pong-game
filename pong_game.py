@@ -2,6 +2,7 @@ import turtle as t
 from padel1 import Padel1
 from padel2 import Padel2
 from ball import Ball
+from scorecard import ScoreCard
 import time
 
 '''
@@ -40,6 +41,10 @@ padel2_l = Padel2(X_POS_padel_left, Y_POS_padel_left)
 # Ball Functionality
 ball = Ball(1,1, "red")
 
+# Scorecard
+r_score = ScoreCard(-100, 230, "Blue")
+l_score = ScoreCard(100, 230, "Pink")
+
 # Make the screen listen to moves
 screen.listen()
 screen.onkey(fun=padel1_r.down, key="Down")
@@ -47,11 +52,11 @@ screen.onkey(fun=padel1_r.up, key="Up")
 screen.onkey(fun=padel2_l.down, key="s")
 screen.onkey(fun=padel2_l.up, key="w")
 
-
+increase_speed = 0.1
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.07)
+    time.sleep(increase_speed)
     ball.move()
 
     x_cor , y_cor = ball.xcor(), ball.ycor()
@@ -64,11 +69,29 @@ while game_is_on:
 
     # Detect r_paddle miss
     if ball.xcor() > 380:
+        r_score.increment_score()
+        l_score.write_score()
+        r_score.write_score()
         ball.reset()
-
+        try:
+            increase_speed -= 0.02
+        except ValueError:
+            increase_speed = 0.02
+    
+        print(increase_speed)
     # Detect l_paddle miss
     if ball.xcor() < -380:
+        l_score.increment_score()
+        l_score.write_score()
+        r_score.write_score()
         ball.reset()
 
+        try:
+            increase_speed -= 0.002
+        except ValueError:
+            increase_speed = 0.02
+    
+        print(increase_speed)
+    # print(increase_speed)
 
 screen.exitonclick()
