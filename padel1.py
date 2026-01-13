@@ -1,29 +1,69 @@
 from turtle import Turtle
-# Here I will be creating the ball class
 
-class Ball(Turtle):
-    def __init__(self,width, height, color):
-        super().__init__() 
-        self.shape("circle")
-        self.color(color)
-        self.penup()
-        self.shapesize(stretch_len= width,stretch_wid=height)
-        self.speed(0)
-        self.x_move = 10
-        self.y_move = 10
+# In this class I will create class for the first padel that will move left or right
 
-    
-    def move(self):
-        # get x_cor and y_core and increment both by 20
-        x_cor, y_cor = self.position()
-        self.goto(x_cor + self.x_move, y_cor + self.y_move)
+# STARTING_POS = [(0,0),(0,20),(0,40)]
 
-    def bounce_x(self):
-        self.x_move *= -1
+INCREMENT = 20
+class Padel1:
 
-    def bounce_y(self):
-        self.y_move *= -1
+    def __init__(self, x_coordinate ,y_coordinate):
+        self.x_coordinate = x_coordinate
+        self.y_coordinate = y_coordinate
+        self.all_head = []
+        self.create_player(x_pos=x_coordinate, y_pos=y_coordinate)
 
-    def reset(self):
-        self.goto(0,0)
-        self.bounce_x()
+
+    def create_player(self, x_pos, y_pos):
+        player = Turtle(shape="square")
+        player.turtlesize(stretch_wid=5,stretch_len=1)
+        player.color("white")
+        player.penup()
+        player.goto(x=x_pos, y=y_pos)
+        self.all_head.append(player)
+
+    def up(self):
+        for i in self.all_head:
+            x, y = i.pos()
+        self.all_head[0].goto(x,y+INCREMENT)
+
+    def down(self):
+        for i in self.all_head:
+            x, y = i.pos()
+        self.all_head[0].goto(x,y-INCREMENT)
+
+
+
+# STARTING_POS = [(-380,0),(-380,20),(-380,40)]
+
+# class Padel1:
+
+#     def __init__(self):
+#         self.all_head = []
+#         self.create_player()
+
+
+#     def create_player(self):
+#         for x, y in STARTING_POS:
+#             player = Turtle(shape="square")
+#             player.color("white")
+#             player.speed("fastest")
+#             player.penup()
+#             player.goto(x=x,y=y)
+#             self.all_head.append(player)
+
+#     # Here I will do function to move the head
+
+#     def down(self):
+#         for pos in range(len(self.all_head)-1, 0, -1):
+#             self.all_head[pos].goto(self.all_head[pos-1].pos())
+#         x,y = self.all_head[0].pos()
+#         self.all_head[0].goto(x, y-20)
+
+#     def up(self):
+#         for pos in range(len(self.all_head)-1):
+#             self.all_head[pos].goto(self.all_head[pos+1].pos())
+#         print(self.all_head[-1].pos())
+#         x,y = self.all_head[-1].pos()
+#         self.all_head[-1].goto(x, y+20)
+
